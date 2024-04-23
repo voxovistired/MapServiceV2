@@ -1,4 +1,4 @@
---!strict
+--!native
 --!optimize 2
 
 local MapService: MapService = {
@@ -115,7 +115,7 @@ function MapService:GetPath(path: { string }): Instance | Background | nil
 	local CurrentAsset: Instance | Background | nil = Assets.Maps;
 	for _, directory: string in path do
 		CurrentAsset = CurrentAsset and CurrentAsset:FindFirstChild(directory);
-		if not CurrentAsset then return nil end;
+		if not (CurrentAsset) then return nil end;
 	end
 
 	return CurrentAsset;
@@ -198,7 +198,7 @@ end
 	@param Users: { [string]: { Player } } This is all of the users that are partaking in the song!
 ]]
 function MapService:CreateStage(MapData: CreatedMap, CurrentStage: Model, Users: { [string]: { Player } }): ()
-	local instancesStore: { string } = { "Map", "Shop" };
+	local __InstancesStore: { string } = { "Map", "Shop" };
 	local __Stages: { Model } = {};
 	local __Players: { Model } = {};
 
@@ -209,7 +209,7 @@ function MapService:CreateStage(MapData: CreatedMap, CurrentStage: Model, Users:
 	self:CacheLighting(MapData.Lighting.Properties);
 
 	-- Tracking/Caching Instances
-	for _, key: string in instancesStore do
+	for _, key: string in __InstancesStore do
 		self.Instances[key] = workspace:FindFirstChild(key);
 		if not (workspace:FindFirstChild(key)) then continue end;
 
